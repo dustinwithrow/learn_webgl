@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn WebGL</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body onload="main()">
+    <div>
+        <h2>Shaders</h2>
+        <canvas id="webGLCanvas"></canvas>
+    </div>
+    <script id="vertex_shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        
+        varying vec4 vertexColor;
+        
+        void main()
+        {
+            gl_Position = vec4(position, 1.0);
+            vertexColor = vec4(0.5, 0.0, 0.0, 1.0);
+        }
+    </script>
+    
+    <script id="vertex_shader_more" type="x-shader/x-vertex">
+        attribute vec3 position;
+        attribute vec3 color;
+        
+        varying vec4 vertexColor;
+        
+        void main()
+        {
+            gl_Position = vec4(position, 1.0);
+            vertexColor = vec4(color, 1.0);
+        }
+    </script>
+    
+    <script id="fragment_shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec4 vertexColor;
+
+        void main() {
+          gl_FragColor = vertexColor;
+        }
+    </script>
+    
+    <script id="fragment_shader_uniforms" type="x-shader/x-fragment">
+        precision mediump float;
+
+        uniform vec4 ourColor;
+
+        void main() {
+          gl_FragColor = ourColor;
+        }
+    </script>
+    
+    <script src="resources/js/gl_utils.js"></script>
+<!-- -->
+    <script src="resources/js/main.js"></script>
+<!-- -->
+<!--
+    <script src="resources/js/main_more.js"></script>
+-->
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn WebGL</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body onload="main()">
+    <div>
+        <h2>Coordinate Systems</h2>
+        <canvas id="webGLCanvas"></canvas>
+    </div>
+    
+    <script id="vertex_shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        attribute vec2 textureCoord;
+        
+        varying highp vec2 _texCoord;
+        
+        uniform mat4 model;
+        uniform mat4 view;
+        uniform mat4 projection;
+        
+        void main()
+        {
+            gl_Position = projection * view * model * vec4(position, 1.0);
+            _texCoord = textureCoord;
+        }
+    </script>
+    
+    <script id="fragment_shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying highp vec2 _texCoord;
+        
+        uniform sampler2D ourTexture1;
+        uniform sampler2D ourTexture2;
+
+        void main() {
+            vec2 fixedTexCoord = vec2(_texCoord.x, 1.0 - _texCoord.y);
+            gl_FragColor = mix(texture2D(ourTexture1, _texCoord), texture2D(ourTexture2, fixedTexCoord), 0.2);
+        }
+    </script>
+    
+    <script src="resources/libs/gl-matrix_2.3.0/gl-matrix.js"></script>
+    <script src="resources/js/gl_utils.js"></script>
+    
+    <!-- -->
+    <script src="resources/js/main.js"></script>
+    <!-- -->
+    
+    <!--
+    <script src="resources/js/main_more_3d.js"></script>
+    -->
+    
+    <!--
+    <script src="resources/js/main_more_cubes.js"></script>
+    -->
+    
+</body>
+</html>

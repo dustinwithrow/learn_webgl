@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn WebGL</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body onload="main()">
+    <div>
+        <h2>Hello Triangle</h2>
+        <canvas id="webGLCanvas"></canvas>
+    </div>
+    <script id="vertex_shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        
+        void main()
+        {
+            gl_Position = vec4(position.x, position.y, position.z, 1.0);
+        }
+    </script>
+    
+    <script id="fragment_shader" type="x-shader/x-fragment">
+    precision mediump float;
+
+    void main() {
+      gl_FragColor = vec4(1.0, 0.5, 0.2, 1.0);
+    }
+    </script>
+    
+    <script src="resources/js/main.js"></script>
+    <!--
+    <script src="resources/js/main_ebo.js"></script>
+    -->
+</body>
+</html>

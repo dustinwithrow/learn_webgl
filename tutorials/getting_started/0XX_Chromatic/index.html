@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn WebGL</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body onload="main()">
+    <div>
+        <h2>Coordinate Systems</h2>
+        <canvas id="webGLCanvas"></canvas>
+    </div>
+    <script id="vertex_shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        attribute vec3 color;
+        attribute vec2 textureCoord;
+        
+        varying vec3 _color;
+        varying highp vec2 _texCoord;
+        
+        uniform mat4 transform;
+        
+        void main()
+        {
+            gl_Position = transform * vec4(position, 1.0);
+            _color = color;
+            _texCoord = textureCoord;
+        }
+    </script>
+    
+    <script id="fragment_shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec3 _color;
+        varying highp vec2 _texCoord;
+        
+        uniform sampler2D ourTexture1;
+        uniform sampler2D ourTexture2;
+
+        void main() {
+            vec2 fixedTexCoord = vec2(_texCoord.x, 1.0 - _texCoord.y);
+            vec4 mixture = mix(texture2D(ourTexture1, _texCoord), texture2D(ourTexture2, fixedTexCoord), 0.2);
+            
+            vec3 rgb = mixture.rgb;
+            
+            //https://en.wikipedia.org/wiki/Luma_(video)
+            //Standard Def (Rec.601)
+            //float luma = (rgb.x * 0.299) + (rgb.y * 0.587) + (rgb.z * 0.114);
+            
+            //High Def (1080p)(Rec.709)
+            float luma = (rgb.x * 0.2126) + (rgb.y * 0.7152) + (rgb.z * 0.0722);
+            
+            //Ultra High Def (SMPTE240M)
+            //float luma = (rgb.x * 0.212) + (rgb.y * 0.701) + (rgb.z * 0.087);
+            
+            gl_FragColor = vec4(luma, luma, luma, 1);
+            //gl_FragColor = mixture;
+        }
+    </script>
+    
+    <script src="resources/libs/gl-matrix_2.3.0/gl-matrix.js"></script>
+    <script src="resources/js/gl_utils.js"></script>
+    <script src="resources/js/main.js"></script>
+</body>
+</html>

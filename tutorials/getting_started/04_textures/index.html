@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn WebGL</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body onload="main()">
+    <div>
+        <h2>Textures</h2>
+        <canvas id="webGLCanvas"></canvas>
+    </div>
+    <script id="vertex_shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        attribute vec3 color;
+        attribute vec2 textureCoord;
+        
+        varying vec3 _color;
+        varying highp vec2 _texCoord;
+        
+        void main()
+        {
+            gl_Position = vec4(position, 1.0);
+            _color = color;
+            _texCoord = textureCoord;
+        }
+    </script>
+    
+    <script id="fragment_shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec3 _color;
+        varying highp vec2 _texCoord;
+        
+        uniform sampler2D ourTexture;
+
+        void main() {
+            gl_FragColor = texture2D(ourTexture, _texCoord) * vec4(_color, 1.0);
+        }
+    </script>
+    
+    <script id="fragment_shader_mixing" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec3 _color;
+        varying highp vec2 _texCoord;
+        
+        uniform sampler2D ourTexture1;
+        uniform sampler2D ourTexture2;
+
+        void main() {
+            vec2 fixedTexCoord = vec2(_texCoord.x, 1.0 - _texCoord.y);
+            gl_FragColor = mix(texture2D(ourTexture1, _texCoord), texture2D(ourTexture2, fixedTexCoord), 0.2);
+        }
+    </script>
+    
+    <script src="resources/js/gl_utils.js"></script>
+    <script src="resources/js/main.js"></script>
+</body>
+</html>
