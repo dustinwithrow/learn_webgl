@@ -1,4 +1,4 @@
-#Hello Triangle
+# Hello Triangle
 \> Tutorial Reference: [Hello Triangle](http://learnopengl.com/#!Getting-started/Hello-Triangle)
 
 Read through the *Tutorial Reference*, and refer back to this for code snippets and comments.
@@ -17,7 +17,7 @@ function getTriangleData()
 }
 ```
 
-###Vertex Shader
+### Vertex Shader
 At the time this was written WebGL 2.0 had been released, but isn't part of many standard browsers. The reason
 this is significant is due to the GLSL language features introduced in GLSL ES 3.00 which is part of the WebGL 2.0
 specification. With GLSL ES 3.00 the language starts to support features(`in` and `out` qualifiers) more similar to 
@@ -86,7 +86,7 @@ function main(){
 }
 ```
 
-###Fragment Shader
+### Fragment Shader
 This is pretty much a repeat of the vertex shader section.
 
 ```
@@ -111,7 +111,7 @@ function main(){
 }
 ```
 
-###Shader Program
+### Shader Program
 There really isn't much of a difference here.
 
 ```
@@ -146,7 +146,7 @@ function main(){
 
 }
 ```
-###Linking Vertex Attributes
+### Linking Vertex Attributes
 The methods and logic start to deverge between WebGL and OpenGL again at this point.
 
 In the current version of WebGL `VertexArrayObject`s don't exist. So we'll be working
@@ -206,7 +206,7 @@ Now all we have left is to configure the `attribute`. We use the
 [vertexAttribPointer()](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/vertexAttribPointer),
 which is syntactically different than its OpenGL counter part, but accomplishes the same goal.
 
-###The triangle we've all been waiting for
+### The triangle we've all been waiting for
 
 For the most part this follows the same logic as in the *Reference Tutorial*, but we've encapsulated our logic
 into a drawing method to make it easier to maintain.
@@ -253,7 +253,7 @@ The `cleanUp()` method will get called when the page is unloaded. In this method
 This isn't technically necessary because when the page is unloaded this will all be cleaned up for you. So you can just allow the
 browser to handle it.
 
-###Element Buffer Objects
+### Element Buffer Objects
 To keep the code more focused, you'll want to switch to the `main_ebo.js` javascript file.
 
 We get the model data from the following method.
@@ -336,11 +336,11 @@ function main(){
 If everything goes well you should now have a lovely orange rectangle rendered in your canvas. 
 Also if you'd like you can delete the `EBO` in the `cleanUp()`.
 
-###Polygon Model
+### Polygon Model
 WebGL doesn't support any other model besides GL_FILL, so to do wireframe you'll have to draw the
 object using LINE_LOOP.
 
-###References
+### References
 
 #### OpenGL to WebGL Method Translations
 | OpengGL Method | WebGL Method   |
