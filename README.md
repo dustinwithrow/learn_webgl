@@ -10,5 +10,3 @@ the two technologies.
 ### What will you learn?
 We'll focus on WebGL and modern HTML and Javascripting techniques. In other words, we'll be using features of HTML5 and ES6
 with no concern for backwards compatibility. We will be teaching you to use WebGL as if you'd be using OpenGL 3.x/4.x.
-
-
